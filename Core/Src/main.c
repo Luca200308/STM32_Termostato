@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ESP8266_HAL.h"
+#include "String.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -69,7 +70,8 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	char msg[] = "BOOT scheda completato, inizio gestione scheda ESP8266\r\n";
+	 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -95,7 +97,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
   ESP_Init("FABLAB-2-4","fablab22");  //cerco la rete di questo nome
   /* USER CODE END 2 */
-
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
