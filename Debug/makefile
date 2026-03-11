@@ -60,8 +60,8 @@ all: main-build
 main-build: Termostato_CTL.elf secondary-outputs
 
 # Tool invocations
-Termostato_CTL.elf Termostato_CTL.map: $(OBJS) $(USER_OBJS) C:\Users\FABLAB\Desktop\STM32_Termostato\STM32L073RZTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Termostato_CTL.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\FABLAB\Desktop\STM32_Termostato\STM32L073RZTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Termostato_CTL.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Termostato_CTL.elf Termostato_CTL.map: $(OBJS) $(USER_OBJS) C:\Users\lucad\OneDrive\Desktop\Termostato_CTL\STM32L073RZTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Termostato_CTL.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\lucad\OneDrive\Desktop\Termostato_CTL\STM32L073RZTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Termostato_CTL.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
