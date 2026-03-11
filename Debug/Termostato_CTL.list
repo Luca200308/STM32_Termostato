@@ -2546,7 +2546,7 @@ int main(void)
  800119a:	1d39      	adds	r1, r7, #4
  800119c:	4806      	ldr	r0, [pc, #24]	@ (80011b8 <main+0x58>)
  800119e:	f001 fde9 	bl	8002d74 <HAL_UART_Transmit>
-  ESP_Init("FABLAB-2-4","fablab22");  //cerco la rete di questo nome
+  ESP_Init("FABLAB-2-4","fablab22");  //CTL con questa funzione si cerca la rete con questo nome
  80011a2:	4a06      	ldr	r2, [pc, #24]	@ (80011bc <main+0x5c>)
  80011a4:	4b06      	ldr	r3, [pc, #24]	@ (80011c0 <main+0x60>)
  80011a6:	0011      	movs	r1, r2
@@ -2557,7 +2557,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  Server_Start();
+	  Server_Start(); //CTL la funzione analizza il traffico dati dall'ESP8266, identifica i comandi URL e controlla lo stato del LED su GPIOA Pin 5.
  80011ae:	f7ff fb6f 	bl	8000890 <Server_Start>
  80011b2:	e7fc      	b.n	80011ae <main+0x4e>
  80011b4:	08004e98 	.word	0x08004e98

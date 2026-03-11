@@ -21,8 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "ESP8266_HAL.h"
-#include "String.h"
+#include "ESP8266_HAL.h" //CTL inclusione del Driver per la gestione del modulo Wi-Fi ESP8266
+#include "String.h" //CTL inclusione per evitare la dichiarazione implicita della funzione strlen() che genera warning
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,7 +96,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	char msg[] = "BOOT scheda completato, inizio gestione scheda ESP8266\r\n";
 	 HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-  ESP_Init("FABLAB-2-4","fablab22");  //cerco la rete di questo nome
+  ESP_Init("FABLAB-2-4","fablab22");  //CTL con questa funzione si cerca la rete con questo nome
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -105,7 +105,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  Server_Start();
+	  Server_Start(); //CTL la funzione analizza il traffico dati dall'ESP8266, identifica i comandi URL e controlla lo stato del LED su GPIOA Pin 5.
   }
   /* USER CODE END 3 */
 }
