@@ -97,16 +97,75 @@ repeat:
 	else return -1;
 }
 
+void GetDataFromBuffer (char *startString, char *endString, char *buffertocopyfrom, char *buffertocopyinto)
+{
+	int startStringLength = strlen (startString);
+	int endStringLength   = strlen (endString);
+	int so_far = 0;
+	int indx = 0;
+	int startposition = 0;
+	int endposition = 0;
+
+repeat1:
+	while (startString[so_far] != buffertocopyfrom[indx]) indx++;
+	if (startString[so_far] == buffertocopyfrom[indx])
+	{
+		while (startString[so_far] == buffertocopyfrom[indx])
+		{
+			so_far++;
+			indx++;
+		}
+	}
+
+	if (so_far == startStringLength) startposition = indx;
+	else
+	{
+		so_far =0;
+		goto repeat1;
+	}
+
+	so_far = 0;
+
+repeat2:
+	while (endString[so_far] != buffertocopyfrom[indx]) indx++;
+	if (endString[so_far] == buffertocopyfrom[indx])
+	{
+		while (endString[so_far] == buffertocopyfrom[indx])
+		{
+			so_far++;
+			indx++;
+		}
+	}
+
+	if (so_far == endStringLength) endposition = indx-endStringLength;
+	else
+	{
+		so_far =0;
+		goto repeat2;
+	}
+
+	so_far = 0;
+	indx=0;
+
+	for (int i=startposition; i<endposition; i++)
+	{
+		buffertocopyinto[indx] = buffertocopyfrom[i];
+		indx++;
+	}
+}
+
 
 void Uart_flush (UART_HandleTypeDef *uart)
 {
 	if (uart == device_uart)
 	{
-		_rx_buffer1->head = _rx_buffer1->tail;
+		memset(_rx_buffer1->buffer,'\0', UART_BUFFER_SIZE);
+		_rx_buffer1->head = 0;
 	}
 	if (uart == pc_uart)
 	{
-		_rx_buffer2->head = _rx_buffer2->tail;
+		memset(_rx_buffer2->buffer,'\0', UART_BUFFER_SIZE);
+		_rx_buffer2->head = 0;
 	}
 }
 
@@ -291,17 +350,20 @@ again:
 
 }
 
-int Wait_for (char *string, UART_HandleTypeDef *uart)
+
+int Wait_for (char *string,UART_HandleTypeDef *uart)
 {
 	int so_far =0;
 	int len = strlen (string);
 
-again:
+again_device:
 	while (!IsDataAvailable(uart));
-	if (uart == device_uart)
-		while (Uart_peek(uart) != string[so_far]) _rx_buffer1->tail = (unsigned int)(_rx_buffer1->tail + 1) % UART_BUFFER_SIZE;
-	else if (uart == pc_uart)
-		while (Uart_peek(uart) != string[so_far]) _rx_buffer2->tail = (unsigned int)(_rx_buffer2->tail + 1) % UART_BUFFER_SIZE;
+	if (Uart_peek(uart) != string[so_far])
+	{
+		 _rx_buffer1->tail = (unsigned int)(_rx_buffer1->tail + 1) % UART_BUFFER_SIZE ;
+		goto again_device;
+
+	}
 	while (Uart_peek(uart) == string [so_far])
 	{
 		so_far++;
@@ -313,7 +375,7 @@ again:
 	if (so_far != len)
 	{
 		so_far = 0;
-		goto again;
+		goto again_device;
 	}
 
 	if (so_far == len) return 1;
