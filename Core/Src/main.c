@@ -101,10 +101,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	 Server_Start(); //CTL la funzione analizza il traffico dati dall'ESP8266, identifica i comandi URL e controlla lo stato del LED su GPIOA Pin 5.
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  Server_Start(); //CTL la funzione analizza il traffico dati dall'ESP8266, identifica i comandi URL e controlla lo stato del LED su GPIOA Pin 5.
   }
   /* USER CODE END 3 */
 }

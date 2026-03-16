@@ -3640,23 +3640,23 @@ LOAD C:/Users/lucad/OneDrive/Desktop/SCUOLA/SCUOLA a.s. 2025_26 IV^/STM32/STM32C
  .debug_macro   0x0001483a      0x1cc ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.o
  .debug_macro   0x00014a06      0x1a1 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.o
 
-.debug_line     0x00000000     0xddf9
+.debug_line     0x00000000     0xddf5
  .debug_line    0x00000000      0xc41 ./Core/Src/ESP8266_HAL.o
  .debug_line    0x00000c41     0x112e ./Core/Src/UartRingbuffer_multi.o
- .debug_line    0x00001d6f      0xb6d ./Core/Src/main.o
- .debug_line    0x000028dc      0x8fd ./Core/Src/stm32l0xx_hal_msp.o
- .debug_line    0x000031d9      0x90b ./Core/Src/stm32l0xx_it.o
- .debug_line    0x00003ae4      0x8a5 ./Core/Src/sysmem.o
- .debug_line    0x00004389      0x929 ./Core/Src/system_stm32l0xx.o
- .debug_line    0x00004cb2       0x7b ./Core/Startup/startup_stm32l073rztx.o
- .debug_line    0x00004d2d      0xbe8 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.o
- .debug_line    0x00005915      0xcb9 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.o
- .debug_line    0x000065ce      0xdab ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.o
- .debug_line    0x00007379      0xc5d ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.o
- .debug_line    0x00007fd6     0x1149 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.o
- .debug_line    0x0000911f      0xf9e ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.o
- .debug_line    0x0000a0bd     0x2fba ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.o
- .debug_line    0x0000d077      0xd82 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.o
+ .debug_line    0x00001d6f      0xb69 ./Core/Src/main.o
+ .debug_line    0x000028d8      0x8fd ./Core/Src/stm32l0xx_hal_msp.o
+ .debug_line    0x000031d5      0x90b ./Core/Src/stm32l0xx_it.o
+ .debug_line    0x00003ae0      0x8a5 ./Core/Src/sysmem.o
+ .debug_line    0x00004385      0x929 ./Core/Src/system_stm32l0xx.o
+ .debug_line    0x00004cae       0x7b ./Core/Startup/startup_stm32l073rztx.o
+ .debug_line    0x00004d29      0xbe8 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.o
+ .debug_line    0x00005911      0xcb9 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.o
+ .debug_line    0x000065ca      0xdab ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.o
+ .debug_line    0x00007375      0xc5d ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.o
+ .debug_line    0x00007fd2     0x1149 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.o
+ .debug_line    0x0000911b      0xf9e ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.o
+ .debug_line    0x0000a0b9     0x2fba ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.o
+ .debug_line    0x0000d073      0xd82 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.o
 
 .debug_str      0x00000000    0x7d553
  .debug_str     0x00000000    0x7d553 ./Core/Src/ESP8266_HAL.o
