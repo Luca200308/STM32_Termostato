@@ -1,4 +1,4 @@
-/* USER CODE BEGIN Header */
+/* USER CODE BEGIN Header */  FROCIAZZO TOMMASO
 /**
   ******************************************************************************
   * @file           : main.c
