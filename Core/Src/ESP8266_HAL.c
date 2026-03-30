@@ -13,37 +13,27 @@
 
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
+extern float temperatura_att;
+extern int setpoint_temp;    // Aggiungi extern
+extern int impianto_attivo;  // Aggiungi extern
 
 #define wifi_uart &huart1
 #define pc_uart &huart2
 
 
 char buffer[20];
-int setpoint_temp = 20; // Temperatura predefinita
-int impianto_attivo = 0; // 0 = Spento, 1 = Acceso
 
 
-char *Basic_inclusion = "<!DOCTYPE html><html>\n<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-		"<title>TERMOSTATO SMART</title>\n<style>"
-		"html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\n"
-		"body{margin-top: 30px;} h1 {color: #444;}\n"
-		".status-dot {height: 50px; width: 50px; border-radius: 50%; display: inline-block; margin: 20px;}\n"
-		".red {background-color: red;} .green {background-color: green;}\n"
-		".btn {display: inline-block; width: 60px; background-color: #34495e; color: white; padding: 15px; text-decoration: none; font-size: 20px; margin: 5px; border-radius: 4px;}\n"
-		".btn-pwr {width: 140px; background-color: #1abc9c;}\n"
-		".off {background-color: #7f8c8d;}\n"
-		"</style></head>\n<body>\n<h1>TERMOSTATO</h1>\n";
+char *Basic_inclusion = "<!DOCTYPE html><html><head>"
+    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+    "<style>body{font-family:Arial;text-align:center;margin-top:20px;}"
+    ".btn{display:inline-block;padding:10px 20px;text-decoration:none;background:#34495e;color:#fff;border-radius:5px;margin:5px;}"
+    ".red{color:red;}.green{color:green;}</style></head>"
+    "<body><h1>TERMOSTATO</h1>";
 
-// Stringhe dinamiche che verranno composte nella Server_Handle
-char *Termo_ON = "<h3>STATO: ACCESO</h3><div class=\"status-dot green\"></div><br>"
-				 "<a class=\"btn off\" href=\"/off\">SPEGNI IMPIANTO</a>";
-char *Termo_OFF = "<h3>STATO: SPENTO</h3><div class=\"status-dot red\"></div><br>"
-				  "<a class=\"btn btn-pwr\" href=\"/on\">ACCENDI IMPIANTO</a>";
-
-char *Temp_Controls = "<hr><h3>SETPOINT TEMPERATURA</h3>"
-					  "<a class=\"btn\" href=\"/dec\">-</a>"
-					  "<span style=\"font-size: 30px; font-weight: bold; margin: 0 15px;\"> %d °C </span>"
-					  "<a class=\"btn\" href=\"/inc\">+</a>";
+char *Temp_Controls = "<h3>SETPOINT: %d &deg;C</h3>"
+                      "<a class=\"btn\" href=\"/dec\">-</a>"
+                      "<a class=\"btn\" href=\"/inc\">+</a><hr>";
 
 char *Terminate = "</body></html>";
 
@@ -139,35 +129,34 @@ int Server_Send (char *str, int Link_ID)
 
 void Server_Handle (char *str, int Link_ID)
 {
-    // Aumentiamo leggermente il buffer se necessario,
-    // ma assicuriamoci che sia pulito (azzerato)
-    char datatosend[1024] = {0};
-    char temp_buf[256] = {0};
+    char datatosend[800] = {0}; // Buffer ridotto per risparmiare RAM
+    char temp_buf[128] = {0};
 
-    // FONDAMENTALE: Intestazione HTTP minima
-    // Senza questa, molti browser mostrano una pagina bianca
+    // Header HTTP
     strcpy(datatosend, "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: close\r\n\r\n");
-
-    // Parte HTML Iniziale
     strcat(datatosend, Basic_inclusion);
 
-    // Stato impianto e spia
+    // 1. Visualizzazione Valore Sensore (temperatura_att)
+    sprintf(temp_buf, "<h2>Ambiente: <span class=\"green\">%.1f &deg;C</span></h2>", temperatura_att);
+    strcat(datatosend, temp_buf);
+
+    // 2. Stato Impianto (Testo semplice invece di icone pesanti)
     if (impianto_attivo) {
-        strcat(datatosend, Termo_ON);
+        strcat(datatosend, "<h3 class=\"green\">STATO: ACCESO</h3><a class=\"btn\" href=\"/off\">SPEGNI</a>");
     } else {
-        strcat(datatosend, Termo_OFF);
+        strcat(datatosend, "<h3 class=\"red\">STATO: SPENTO</h3><a class=\"btn\" href=\"/on\">ACCENDI</a>");
     }
 
-    // Controlli temperatura
+    // 3. Controlli Setpoint
     sprintf(temp_buf, Temp_Controls, setpoint_temp);
     strcat(datatosend, temp_buf);
 
-    // Chiusura HTML
     strcat(datatosend, Terminate);
 
-    // Invio effettivo
+    // Invio finale
     Server_Send(datatosend, Link_ID);
 }
+
 
 void Server_Start (void)
 {
