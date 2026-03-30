@@ -37,27 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00014bd7  00000000  00000000  000143d9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
-<<<<<<< Updated upstream
- 17 .debug_line   0000ddf5  00000000  00000000  00028f38  2**0
+ 17 .debug_line   0000c7d5  00000000  00000000  00028fb0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0007d553  00000000  00000000  00036d2d  2**0
+ 18 .debug_str    0007d57f  00000000  00000000  00035785  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000b4280  2**0
+ 19 .comment      00000043  00000000  00000000  000b2d04  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00002260  00000000  00000000  000b42c4  2**2
+ 20 .debug_frame  00002240  00000000  00000000  000b2d48  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000005d  00000000  00000000  000b6524  2**0
-=======
- 17 .debug_line   0000c7d7  00000000  00000000  00028fb0  2**0
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0007d57f  00000000  00000000  00035787  2**0
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000b2d06  2**0
-                  CONTENTS, READONLY
- 20 .debug_frame  00002240  00000000  00000000  000b2d4c  2**2
-                  CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000057  00000000  00000000  000b4f8c  2**0
->>>>>>> Stashed changes
+ 21 .debug_line_str 00000057  00000000  00000000  000b4f88  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2533,35 +2521,17 @@ int main(void)
  8001134:	f000 f8b2 	bl	800129c <MX_USART2_UART_Init>
   /* USER CODE BEGIN 2 */
   ESP_Init("FABLAB-2-4","fablab22");  //CTL con questa funzione si cerca la rete con questo nome
-<<<<<<< Updated upstream
- 8001130:	4a04      	ldr	r2, [pc, #16]	@ (8001144 <main+0x2c>)
- 8001132:	4b05      	ldr	r3, [pc, #20]	@ (8001148 <main+0x30>)
- 8001134:	0011      	movs	r1, r2
- 8001136:	0018      	movs	r0, r3
- 8001138:	f7ff f9a4 	bl	8000484 <ESP_Init>
-=======
  8001138:	4a04      	ldr	r2, [pc, #16]	@ (800114c <main+0x2c>)
  800113a:	4b05      	ldr	r3, [pc, #20]	@ (8001150 <main+0x30>)
  800113c:	0011      	movs	r1, r2
  800113e:	0018      	movs	r0, r3
  8001140:	f7ff f996 	bl	8000470 <ESP_Init>
->>>>>>> Stashed changes
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-<<<<<<< Updated upstream
 	 Server_Start(); //CTL la funzione analizza il traffico dati dall'ESP8266, identifica i comandi URL e controlla lo stato del LED su GPIOA Pin 5.
- 800113c:	f7ff fba8 	bl	8000890 <Server_Start>
- 8001140:	e7fc      	b.n	800113c <main+0x24>
- 8001142:	46c0      	nop			@ (mov r8, r8)
- 8001144:	08004cc4 	.word	0x08004cc4
- 8001148:	08004cd0 	.word	0x08004cd0
-
-0800114c <SystemClock_Config>:
-=======
-	Server_Start(); //CTL la funzione analizza il traffico dati dall'ESP8266, identifica i comandi URL e controlla lo stato del LED su GPIOA Pin 5.
  8001144:	f7ff fb88 	bl	8000858 <Server_Start>
  8001148:	e7fc      	b.n	8001144 <main+0x24>
  800114a:	46c0      	nop			@ (mov r8, r8)
@@ -2569,7 +2539,6 @@ int main(void)
  8001150:	08004db8 	.word	0x08004db8
 
 08001154 <SystemClock_Config>:
->>>>>>> Stashed changes
 /**
   * @brief System Clock Configuration
   * @retval None

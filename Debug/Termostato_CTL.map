@@ -3644,43 +3644,23 @@ LOAD C:/ST/STM32CubeIDE_2.0.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_macro   0x0001486a      0x1cc ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.o
  .debug_macro   0x00014a36      0x1a1 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.o
 
-<<<<<<< Updated upstream
-.debug_line     0x00000000     0xddf5
- .debug_line    0x00000000      0xc41 ./Core/Src/ESP8266_HAL.o
- .debug_line    0x00000c41     0x112e ./Core/Src/UartRingbuffer_multi.o
- .debug_line    0x00001d6f      0xb69 ./Core/Src/main.o
- .debug_line    0x000028d8      0x8fd ./Core/Src/stm32l0xx_hal_msp.o
- .debug_line    0x000031d5      0x90b ./Core/Src/stm32l0xx_it.o
- .debug_line    0x00003ae0      0x8a5 ./Core/Src/sysmem.o
- .debug_line    0x00004385      0x929 ./Core/Src/system_stm32l0xx.o
- .debug_line    0x00004cae       0x7b ./Core/Startup/startup_stm32l073rztx.o
- .debug_line    0x00004d29      0xbe8 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.o
- .debug_line    0x00005911      0xcb9 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.o
- .debug_line    0x000065ca      0xdab ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.o
- .debug_line    0x00007375      0xc5d ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.o
- .debug_line    0x00007fd2     0x1149 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.o
- .debug_line    0x0000911b      0xf9e ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.o
- .debug_line    0x0000a0b9     0x2fba ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.o
- .debug_line    0x0000d073      0xd82 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.o
-=======
-.debug_line     0x00000000     0xc7d7
+.debug_line     0x00000000     0xc7d5
  .debug_line    0x00000000      0xab2 ./Core/Src/ESP8266_HAL.o
  .debug_line    0x00000ab2      0xf98 ./Core/Src/UartRingbuffer_multi.o
- .debug_line    0x00001a4a      0x9d5 ./Core/Src/main.o
- .debug_line    0x0000241f      0x7a3 ./Core/Src/stm32l0xx_hal_msp.o
- .debug_line    0x00002bc2      0x7b1 ./Core/Src/stm32l0xx_it.o
- .debug_line    0x00003373      0x61e ./Core/Src/sysmem.o
- .debug_line    0x00003991      0x7cf ./Core/Src/system_stm32l0xx.o
- .debug_line    0x00004160       0x7b ./Core/Startup/startup_stm32l073rztx.o
- .debug_line    0x000041db      0xa8e ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.o
- .debug_line    0x00004c69      0xb5f ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.o
- .debug_line    0x000057c8      0xc51 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.o
- .debug_line    0x00006419      0xb03 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.o
- .debug_line    0x00006f1c      0xfef ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.o
- .debug_line    0x00007f0b      0xe44 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.o
- .debug_line    0x00008d4f     0x2e60 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.o
- .debug_line    0x0000bbaf      0xc28 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.o
->>>>>>> Stashed changes
+ .debug_line    0x00001a4a      0x9d3 ./Core/Src/main.o
+ .debug_line    0x0000241d      0x7a3 ./Core/Src/stm32l0xx_hal_msp.o
+ .debug_line    0x00002bc0      0x7b1 ./Core/Src/stm32l0xx_it.o
+ .debug_line    0x00003371      0x61e ./Core/Src/sysmem.o
+ .debug_line    0x0000398f      0x7cf ./Core/Src/system_stm32l0xx.o
+ .debug_line    0x0000415e       0x7b ./Core/Startup/startup_stm32l073rztx.o
+ .debug_line    0x000041d9      0xa8e ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.o
+ .debug_line    0x00004c67      0xb5f ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.o
+ .debug_line    0x000057c6      0xc51 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.o
+ .debug_line    0x00006417      0xb03 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.o
+ .debug_line    0x00006f1a      0xfef ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.o
+ .debug_line    0x00007f09      0xe44 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.o
+ .debug_line    0x00008d4d     0x2e60 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.o
+ .debug_line    0x0000bbad      0xc28 ./Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.o
 
 .debug_str      0x00000000    0x7d57f
  .debug_str     0x00000000    0x7d57f ./Core/Src/ESP8266_HAL.o
