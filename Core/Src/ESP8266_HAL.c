@@ -14,8 +14,8 @@
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 extern float temperatura_att;
-extern int setpoint_temp;    // Aggiungi extern
-extern int impianto_attivo;  // Aggiungi extern
+extern int setpoint_temp;
+extern int impianto_attivo;
 
 #define wifi_uart &huart1
 #define pc_uart &huart2
@@ -105,20 +105,20 @@ int Server_Send (char *str, int Link_ID)
     int len = strlen (str);
     char data[80];
 
-    // Comunichiamo all'ESP quanti byte stiamo per inviare
+    //CTL comunicazione all'ESP quanti byte stiamo per inviare
     sprintf (data, "AT+CIPSEND=%d,%d\r\n", Link_ID, len);
     Uart_sendstring(data, wifi_uart);
 
-    // Attendiamo il prompt '>'
+    //CTL attesa prompt '>'
     while (!(Wait_for(">", wifi_uart)));
 
-    // Inviamo la stringa HTML
+    //CTL invio stringa HTML
     Uart_sendstring (str, wifi_uart);
 
-    // Attendiamo la conferma dell'invio
+    //CTL attesa conferma dell'invio
     while (!(Wait_for("SEND OK", wifi_uart)));
 
-    // Chiudiamo SOLO il Link_ID corrente per liberare la connessione al browser
+    //CTL si chiude SOLO il Link_ID corrente per liberare la connessione al browser
     sprintf (data, "AT+CIPCLOSE=%d\r\n", Link_ID);
     Uart_sendstring(data, wifi_uart);
 
@@ -129,31 +129,31 @@ int Server_Send (char *str, int Link_ID)
 
 void Server_Handle (char *str, int Link_ID)
 {
-    char datatosend[800] = {0}; // Buffer ridotto per risparmiare RAM
+    char datatosend[800] = {0}; //CTL riduzione del buffer ridotto per risparmiare RAM
     char temp_buf[128] = {0};
 
-    // Header HTTP
+    //CTL header HTTP
     strcpy(datatosend, "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: close\r\n\r\n");
     strcat(datatosend, Basic_inclusion);
 
-    // 1. Visualizzazione Valore Sensore (temperatura_att)
-    sprintf(temp_buf, "<h2>Ambiente: <span class=\"green\">%.1f &deg;C</span></h2>", temperatura_att);
+    //CTL visualizzazione Valore Sensore (temperatura_att)
+    sprintf(temp_buf, "<h2>Ambiente: <span class=\"green\">%.1f &deg;C</span></h2>", temperatura_att); // @suppress("Float formatting support")
     strcat(datatosend, temp_buf);
 
-    // 2. Stato Impianto (Testo semplice invece di icone pesanti)
+    //CTL stato dell'impianto (testo semplice invece di icone pesanti)
     if (impianto_attivo) {
         strcat(datatosend, "<h3 class=\"green\">STATO: ACCESO</h3><a class=\"btn\" href=\"/off\">SPEGNI</a>");
     } else {
         strcat(datatosend, "<h3 class=\"red\">STATO: SPENTO</h3><a class=\"btn\" href=\"/on\">ACCENDI</a>");
     }
 
-    // 3. Controlli Setpoint
+    //CTL controlli Setpoint
     sprintf(temp_buf, Temp_Controls, setpoint_temp);
     strcat(datatosend, temp_buf);
 
     strcat(datatosend, Terminate);
 
-    // Invio finale
+    //CTL invio finale
     Server_Send(datatosend, Link_ID);
 }
 
@@ -168,22 +168,22 @@ void Server_Start (void)
 
 	if (Look_for("/on", buftocopyinto) == 1) {
 		impianto_attivo = 1;
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1); // Accendi LED fisico
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1); //CTL accensione LED fisico
 	}
 	else if (Look_for("/off", buftocopyinto) == 1) {
 		impianto_attivo = 0;
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0); // Spegni LED fisico
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0); //CTL spegnimento LED fisico
 	}
 	else if (Look_for("/inc", buftocopyinto) == 1) {
-		if(setpoint_temp < 30) setpoint_temp++; // Limite max 30 gradi
+		if(setpoint_temp < 30) setpoint_temp++; //CTL limite max 30 gradi
 	}
 	else if (Look_for("/dec", buftocopyinto) == 1) {
-		if(setpoint_temp > 5) setpoint_temp--;  // Limite min 5 gradi
+		if(setpoint_temp > 5) setpoint_temp--;  //CTL limite min 5 gradi
 	}
 
-	// Gestione favicon per evitare doppi invii
+	//CTL gestione favicon per evitare doppi invii
 	if (Look_for("/favicon.ico", buftocopyinto) == 1) return;
 
-	// In ogni caso, rinfresca la pagina con i nuovi dati
+	//CTL a priori, si rinfresca la pagina con i nuovi dati
 	Server_Handle(" ", Link_ID);
 }

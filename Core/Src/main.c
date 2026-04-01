@@ -48,8 +48,8 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 float temperatura_att = 0.0;
-int setpoint_temp = 20;     // Definizione globale
-int impianto_attivo = 0;    // Definizione globale
+int setpoint_temp = 20;
+int impianto_attivo = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -107,34 +107,33 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  // 1. Lettura Sensore (Media di più letture per stabilità)
+	  //CTL lettura del sensore - per una maggiore stavilità si fa la media di più letture per stabilità -
 	        HAL_ADC_Start(&hadc);
 	        if (HAL_ADC_PollForConversion(&hadc, 10) == HAL_OK)
 	        {
 	            uint32_t adc_val = HAL_ADC_GetValue(&hadc);
 	            float millivolt = (adc_val * 3300.0) / 4095.0;
-	            // Supponendo un sensore tipo LM35 (10mV per grado)
+	            //CTL dato il sensore LM35 - 10mV per grado-
 	            temperatura_att = millivolt / 10.0;
 	        }
 	        HAL_ADC_Stop(&hadc);
 
-	        // 2. Logica con Isteresi (0.5 gradi)
+	        //CTL logica con isteresi (0.5 gradi)
 	        float margine = 0.5;
 	        if (impianto_attivo) {
 	            if (temperatura_att < (setpoint_temp - margine)) {
-	                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET); // Accendi
+	                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET); //CTL accensione
 	            }
 	            else if (temperatura_att > (setpoint_temp + margine)) {
-	                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET); // Spegni
+	                HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET); //CTL spegnimento
 	            }
 	        } else {
-	            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET); // Forza spento
+	            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET); //CTL forzatura dello spegnimento
 	        }
 
-	        // 3. Gestione Web
 	        Server_Start();  //CTL la funzione analizza il traffico dati dall'ESP8266, identifica i comandi URL e controlla lo stato del LED su GPIOA Pin 5.
 
-	        // Un piccolo delay aiuta a non saturare il processore
+	        // CTL rallentamento per evitare la saturazione del processore
 	        HAL_Delay(10);
     /* USER CODE END WHILE */
 
