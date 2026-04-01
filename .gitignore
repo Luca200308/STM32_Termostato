@@ -1,1 +1,6 @@
-/Debug/
+Debug/
+Release/
+*.o
+*.elf
+*.su
+*.cyclo

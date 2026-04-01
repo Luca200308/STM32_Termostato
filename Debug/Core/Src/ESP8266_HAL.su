@@ -1,4 +1,0 @@
-../Core/Src/ESP8266_HAL.c:42:6:ESP_Init	112	static
-../Core/Src/ESP8266_HAL.c:103:5:Server_Send	112	static
-../Core/Src/ESP8266_HAL.c:130:6:Server_Handle	952	static
-../Core/Src/ESP8266_HAL.c:161:6:Server_Start	88	static
